@@ -15,17 +15,26 @@ function viirs_process_vcmip, vcmip_file, $
    if ~keyword_set(no_glt) then $
       viirs_build_glt, vcmip_data.longitude, vcmip_data.latitude, $
       out_name=vcmip_glt_file
-      
-   vcmip = viirs_decode_vcm(vcmip_data, /morph_open)
+
+   ; Bowtie deletion.
+   i_bowtie = where(vcmip_data.qf1_viirscmip eq 0B, /null)
+   qf1_bowtie = float(vcmip_data.qf1_viirscmip)
+   qf1_bowtie[i_bowtie] = !values.f_nan
+   eliminate_lines_single, vcmip_data.latitude, vcmip_data.longitude, qf1_bowtie, 1
+   i_remaining = where(~finite(qf1_bowtie), /null)
+   qf1_bowtie[i_remaining] = 0.0
+   qf1_corrected = byte(qf1_bowtie)
+
+   vcmip = viirs_decode_vcm(qf1_corrected)
    
    vcmip_geo_file = output_dir + 'vcmip-georef.dat'
    if ~keyword_set(no_geo) then $
       viirs_georeference_mask, vcmip, vcmip_glt_file, $
-      out_name=vcmip_geo_file, /offset
+         out_name=vcmip_geo_file, /offset
       
    if ~keyword_set(no_pics) then $
       viirs_make_pretty_pictures, data1=vcmip_data, data2=vcmip, $
-      out_dir=output_dir, /vcmip
+         out_dir=output_dir, /vcmip
       
    return, vcmip_geo_file
 end

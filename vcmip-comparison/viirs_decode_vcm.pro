@@ -6,8 +6,6 @@
 ; I'm choosing to return pixels that are confident/probably cloudy and have
 ; high/medium quality.
 ;
-; Optionally, apply morphological opening operation to reduce noise.
-;
 ; :params:
 ;  dataset
 ;
@@ -23,7 +21,7 @@ function viirs_decode_vcm, dataset
    return, mask
 end
 
-; Example
+; Example (assumes data file is in path)
 f = file_which('GMODO-IICMO_npp_d20120206_t2358058_e0003462_b01442_c20120606211325714750_noaa_ops.h5')
 vcmip_data = viirs_ingest_vcmip_file(f)
 vcmip = viirs_decode_vcm(vcmip_data.qf1_viirscmip)

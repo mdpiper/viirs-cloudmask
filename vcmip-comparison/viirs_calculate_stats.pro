@@ -1,3 +1,9 @@
+;+
+; Calculates statistics and skill scores for comparing VIBCM and VCMIP.
+;
+; :author:
+;  Mark Piper (mark.piper@colorado.edu)
+;-
 function viirs_calculate_stats, stacked_file
    compile_opt idl2
 

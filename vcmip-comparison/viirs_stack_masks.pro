@@ -1,5 +1,8 @@
 ;+
 ; Layer stacking. VIBCM as reference. Nearest neighbor sampling/replication.
+; 
+; :author:
+;  Mark Piper (mark.piper@colorado.edu)
 ;-
 pro viirs_stack_masks, vibcm_file, vcmip_file, $
       out_name=out_name, $

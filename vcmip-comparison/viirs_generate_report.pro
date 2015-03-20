@@ -1,3 +1,9 @@
+;+
+; Generates a text-based report with statistics and skill scores.
+;
+; :author:
+;  Mark Piper (mark.piper@colorado.edu)
+;-
 pro viirs_generate_report, stats, out_name=out_name
    compile_opt idl2
    

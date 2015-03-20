@@ -1,3 +1,9 @@
+;+
+; Makes pictures for presentations.
+;
+; :author:
+;  Mark Piper (mark.piper@colorado.edu)
+;-
 pro viirs_make_pretty_pictures, $
       data1=data1, $
       data2=data2, $
