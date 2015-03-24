@@ -1,3 +1,4 @@
+; docformat = 'rst'
 ;+
 ; Generates a text-based report with statistics and skill scores.
 ;

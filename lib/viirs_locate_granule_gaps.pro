@@ -4,23 +4,23 @@
 ; using the included geolocation (longitude, though latitude would also work)
 ; information.
 ;
-; :returns:
-;  An 8-element array containing the start and stop indices of the four 
-;  granules in the file.
-;  
 ; :params:
 ;  longitude: in, required, type=float
 ;   An array of longitude values read from a VIIRS I-Band Imagery EDR.
 ;
+; :returns:
+;  An 8-element array containing the start and stop indices of the four 
+;  granules in the file, or null on fail.
+;
 ; :requires:
 ;  IDL 8
-;  
+;
 ; :author:
 ;  Mark Piper (mark.piper@colorado.edu)
 ;-
 function viirs_locate_granule_gaps, longitude
    compile_opt idl2
-   
+
    ; Locate the gaps between granules with a vertical trace through the
    ; longitudes.
    lon_vertical_trace = longitude[0,*] ; first column
@@ -42,6 +42,6 @@ function viirs_locate_granule_gaps, longitude
       igap2[-1]+1, igap3[0]-1, $ ; #3
       igap3[-1]+1, igap4[0]-1 $  ; #4
       ]
-   
+
    return, index
 end

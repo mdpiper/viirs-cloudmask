@@ -1,3 +1,22 @@
+; docformat = 'rst'
+;+
+; Reads an array of quality flags and geocoords from a VIIRS Cloud
+; Mask (VCM) Intermediate Product file. The flags and geocoords 
+; are returned as a structure variable.
+;
+; :params:
+;  vcmip_file: in, required, type=string
+;   The path to a VIIRS Cloud Mask Intermediate Product file.
+;  
+; :uses:
+;  VIIRS_READ_DATASET
+;
+; :requires:
+;  IDL 8.1
+;  
+; :author:
+;  Mark Piper (mark.piper@colorado.edu)
+;-
 function viirs_ingest_vcmip_file, vcmip_file
    compile_opt idl2
  
@@ -12,7 +31,6 @@ function viirs_ingest_vcmip_file, vcmip_file
    endforeach
    
    ; Read the first byte of the VCM IP.
-   ; TODO: think more about this.
    dataset = '/All_Data/VIIRS-CM-IP_All/QF1_VIIRSCMIP'
    data['QF1_VIIRSCMIP'] = viirs_read_dataset(vcmip_file, dataset)
    
@@ -20,7 +38,7 @@ function viirs_ingest_vcmip_file, vcmip_file
    return, data.tostruct()
 end
 
-; Example
+; Example (assuming data in IDL path)
 f = file_which('GMODO-IICMO_npp_d20120206_t2358058_e0003462_b01442_c20120606211325714750_noaa_ops.h5')
 vcmip_data = viirs_ingest_vcmip_file(f)
 help, vcmip_data

@@ -83,7 +83,7 @@ function viirs_ingest_iband_file, viirs_file, report=report
    return, data.tostruct()
 end
 
-; Example
+; Example (assuming data in IDL path)
 f = file_which('GIGTO-VI1BO-VI2BO-VI3BO-VI4BO-VI5BO_npp_d20120206_t2357498_e0004017_b01442_c20120208215415851238_noaa_ops.h5')
 iband_data = viirs_ingest_iband_file(f)
 help, iband_data
